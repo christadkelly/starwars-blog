@@ -5,11 +5,24 @@ import "../../styles/home.css";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+	const categories = ["characters", "vehicles", "planets"];
+	const headerCategories = ["Characters", "Vehicles", "Planets"];
+
 	return (
-	  <div className="row flex-row flex-nowrap overflow-auto">
-		{store.characters.map((item, index) => {
-		  return <Card key={index} name={item.name}/>;
-		})}
-	  </div>
+		<div className="container">
+			{categories.map((category, idx) =>{
+				return (
+					<div>
+						<h1 className="text-danger">{headerCategories[idx]}</h1>
+						<div className="row flex-row flex-nowrap overflow-auto">
+							{store[category].map((item, index) => {
+		  					return <Card index={index} key={index} category={category}/>;
+							})}
+	  					</div>
+					</div>	
+				)
+			})}
+		</div>
+	  
 	);
   };
