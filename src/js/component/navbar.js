@@ -1,16 +1,14 @@
 import React, { useContext } from "react";
 import { Context } from '../store/appContext'
-import { useNavigate } from "react-router-dom"; 
 import { Link } from "react-router-dom";
 
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
-	const navigate = useNavigate();
-	const clickHandler = (item) => {
-		console.log(category)
-        // navigate(`/${category}/${index}`)
-    }
+	const deleteHandler = (favorite) => {
+		console.log(favorite)
+		// actions.deleteFavorite(index)
+	}
 
 	return (
 		<nav className="navbar navbar-light bg-light mb-3">
@@ -29,14 +27,18 @@ export const Navbar = () => {
 						<span className="badge mx-1">{store.favorites.length}</span>
   					</button>
   					<ul class="dropdown-menu">
-    					{store.favorites.map((item, idx) => {
+						{store.favorites.length === 0 ? <p className="text-center">Add a favorite!</p>:
+						store.favorites.map((item, idx) => {
 							return(
-								<li>
-									<Link index={idx} class="dropdown-item" to={`/${item.category}/${item.index}`}>{item.name}</Link>
+								<li className="d-flex align-items-center" key={idx}>
+									<Link idx={idx} class="dropdown-item" to={`/${item.category}/${item.index}`}>{item.name}</Link>
+									<button onClick={() => actions.deleteFavorite(idx)}>
+										<i class="fa-regular fa-trash-can"></i>
+									</button>
 								</li>
 							)
 						})
-							}
+						}
   					</ul>
 				</div>
 			</div>

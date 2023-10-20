@@ -6,7 +6,6 @@ export const Details = () => {
 	const { store, actions } = useContext(Context);
     const { index, category } = useParams();
     const item = store[category][index];
-    console.log(item)
     
 	return (
 		<div className="container">

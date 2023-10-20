@@ -38,8 +38,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const newFavoriteDetails = {"name": newFavorite.name, "category": category, "index": index }
 				const newList = list.toSpliced((list.length-1), 0, newFavoriteDetails)
 				setStore({favorites: newList})
-				console.log(newFavoriteDetails)
-				console.log(newList)
+			},
+			deleteFavorite: (idx) => {
+				const currentFavorites = getStore().favorites;
+				const newFavorites = currentFavorites.filter((t, currentIdx) => idx != currentIdx);
+				setStore({favorites: newFavorites});
 			}
 		}
 	};
