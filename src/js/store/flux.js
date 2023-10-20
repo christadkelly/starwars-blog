@@ -8,8 +8,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			getData: async () => {
-				console.log(Object.keys(getStore()))
 				Object.keys(getStore()).forEach(async(key, idx) => {
+					// let localData = localStorage.getItem(key);
+					// if (localData !== null && getStore()[key].length === 0) {
+					// 	localData = JSON.parse(localData);
+					// 	setStore({ [key] : localData});
+					// }
 					if (key !== 'favorites'){
 						try {
 							const response = await fetch(`https://www.swapi.tech/api/${key}`);

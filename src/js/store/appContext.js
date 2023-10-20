@@ -22,6 +22,16 @@ const injectContext = PassedComponent => {
 			state.actions.getData();
 		}, []);
 
+		// useEffect(() => {
+		// 	localStorage.setItem('people', JSON.stringify(state.store.people));
+		// 	localStorage.setItem('planets', JSON.stringify(state.store.planets));
+		// 	localStorage.setItem('vehicles', JSON.stringify(state.store.vehicles))
+		// }, [state.store.people, state.store.planets, state.store.vehicles]);
+
+		// useEffect(() => {
+		// 	localStorage.setItem('favorites', JSON.stringify(state.store.favorites))
+		// }, [state.store.favorites])
+
 		return (
 			<Context.Provider value={state}>
 				<PassedComponent {...props} />

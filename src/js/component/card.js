@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from '../store/appContext'
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,18 @@ const Card = (props) => {
     const category = props.category;
     const index = props.index;
     const item = store[category][index];
+    const favoritesList = [];
+
+    useEffect(() => {
+        store.favorites.map((favorite) => {
+            favoritesList.push(favorite.name)
+        })
+        if(favoritesList.includes(item.name)) {
+            setClicked(true)
+        } else {
+            setClicked(false)
+        }
+    }, [store.favorites])
 
     const clickHandler = () => {
         navigate(`/${category}/${index}`)
@@ -22,7 +34,6 @@ const Card = (props) => {
         actions.deleteFavorite(item)
         setClicked(false)
     }
-    
 
 	return (
         <div className="card mx-2 p-0" style={{width: '18rem'}}>
