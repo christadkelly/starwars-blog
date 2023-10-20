@@ -9,11 +9,11 @@ export const Home = () => {
 	const headerCategories = ["Characters", "Planets", "Vehicles"];
 
 	return (
-		<div className="container">
+		<div className="container pb-5">
 			{categories.map((category, idx) =>{
 				return (
-					<div>
-						<h1 className="text-danger">{headerCategories[idx]}</h1>
+					<div className="mb-4">
+						<h1 className="text-danger my-3">{headerCategories[idx]}</h1>
 						<div className="row flex-row flex-nowrap overflow-auto">
 							{store[category].map((item, index) => {
 		  					return <Card index={index} key={index} category={category}/>;

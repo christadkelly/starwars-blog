@@ -25,7 +25,7 @@ const Card = (props) => {
     
 
 	return (
-        <div className="card mx-2" style={{width: '18rem'}}>
+        <div className="card mx-2 p-0" style={{width: '18rem'}}>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfYSTMfRq8swN37jSCSqwEzjlzhv5IMINzl_JG3rDz&s" className="card-img-top img-fluid" alt="..."/>
             <div className="card-body">
                 <h5 className="card-title">
