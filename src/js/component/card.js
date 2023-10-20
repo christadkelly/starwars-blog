@@ -9,7 +9,10 @@ const Card = (props) => {
     const index = props.index;
     const item = store[category][index];
     const clickHandler = () => {
-        navigate(`/character/${index}`)
+        navigate(`/${category}/${index}`)
+    }
+    const favoriteClick = () => {
+        actions.addFavorite(category, index)
     }
 
 	return (
@@ -24,7 +27,7 @@ const Card = (props) => {
                 <p className="card-text">Vehicle Class: <br/>Cost: credits</p>}
                 <div className="d-flex justify-content-between">
                     <button className="btn btn-outline-primary" onClick={clickHandler}>Learn more!</button>
-                    <button type="button" className="btn btn-outline-warning">
+                    <button type="button" className="btn btn-outline-warning" onClick={favoriteClick}>
                         <i className="fa-regular fa-heart"></i>
                     </button>
                 </div>

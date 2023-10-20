@@ -31,6 +31,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getCharacters: async () => {
 				const url = `https://www.swapi.tech/api/people`;
 				getActions().getAPI(url);
+			},
+			addFavorite: (category, index) => {
+				const list = getStore().favorites;
+				const newFavorite = getStore()[category][index];
+				const newFavoriteDetails = {"name": newFavorite.name, "category": category, "index": index }
+				const newList = list.toSpliced((list.length-1), 0, newFavoriteDetails)
+				setStore({favorites: newList})
+				console.log(newFavoriteDetails)
+				console.log(newList)
 			}
 		}
 	};

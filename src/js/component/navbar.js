@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from '../store/appContext'
+import { useNavigate } from "react-router-dom"; 
 import { Link } from "react-router-dom";
 
+
 export const Navbar = () => {
+	const { store, actions } = useContext(Context);
+	const navigate = useNavigate();
+	const clickHandler = (item) => {
+		console.log(category)
+        // navigate(`/${category}/${index}`)
+    }
+
 	return (
 		<nav className="navbar navbar-light bg-light mb-3">
 			<div className="container">
@@ -16,9 +26,17 @@ export const Navbar = () => {
 				<div class="dropdown">
   					<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     					Favorites 
+						<span className="badge mx-1">{store.favorites.length}</span>
   					</button>
   					<ul class="dropdown-menu">
-    					<li><a class="dropdown-item" href="#">Action</a></li>
+    					{store.favorites.map((item, idx) => {
+							return(
+								<li>
+									<Link index={idx} class="dropdown-item" to={`/${item.category}/${item.index}`}>{item.name}</Link>
+								</li>
+							)
+						})
+							}
   					</ul>
 				</div>
 			</div>
