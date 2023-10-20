@@ -1,36 +1,37 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			characters: [],
+			people: [],
 			planets: [],
 			vehicles: [],
 			favorites: []
 		},
 		actions: {
-			getAPI: async (url) => {
-				try {
-					const response = await fetch(url);
-					const apiResponse = await response.json();
-					const apiCharacters = apiResponse.results;
-					apiCharacters.map(async(character, index) => {
-						try{
-							const resp = await fetch(character.url)
-							const newResp = await resp.json()
-							const newCharacter = newResp.result.properties
-							const currentCharacters = getStore().characters
-							const tempCharacters = currentCharacters.toSpliced(index, 0, newCharacter)
-							setStore({characters: tempCharacters})
-						}catch(error){
-							console.log('mapping', error)
+			getData: async () => {
+				console.log(Object.keys(getStore()))
+				Object.keys(getStore()).forEach(async(key, idx) => {
+					if (key !== 'favorites'){
+						try {
+							const response = await fetch(`https://www.swapi.tech/api/${key}`);
+							const apiResponse = await response.json();
+							const apiResults = apiResponse.results;
+							apiResults.map(async(item, index) => {
+								try{
+									const resp = await fetch(item.url)
+									const newResp = await resp.json()
+									const newItem = newResp.result.properties
+									const currentItems = getStore()[key]
+									const tempItems = currentItems.toSpliced(index, 0, newItem)
+									setStore({ [key] : tempItems})
+								}catch(error){
+									console.log('mapping', error)
+								}
+							})
+						} catch(error){
+							console.log('error', error)
 						}
-					})
-				} catch(error){
-					console.log('error', error)
-				}
-			},
-			getCharacters: async () => {
-				const url = `https://www.swapi.tech/api/people`;
-				getActions().getAPI(url);
+					}
+				})
 			},
 			addFavorite: (category, index) => {
 				const list = getStore().favorites;

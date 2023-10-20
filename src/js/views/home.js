@@ -5,8 +5,8 @@ import "../../styles/home.css";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	const categories = ["characters", "vehicles", "planets"];
-	const headerCategories = ["Characters", "Vehicles", "Planets"];
+	const categories = ["people", "planets", "vehicles"];
+	const headerCategories = ["Characters", "Planets", "Vehicles"];
 
 	return (
 		<div className="container">

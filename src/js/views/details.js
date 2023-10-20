@@ -21,7 +21,7 @@ export const Details = () => {
                 </div>
             </div>
             <hr className="text-danger"></hr>
-            {category ==='characters' ?  <div className="row text-center fw-bold text-danger">
+            {category ==='people' ?  <div className="row text-center fw-bold text-danger">
                 <div className="col-2">Birth Year</div>
                 <div className="col-2">Gender</div>
                 <div className="col-2">Height</div>
@@ -45,7 +45,7 @@ export const Details = () => {
                 <div className="col-2">Manufacturer</div>
                 <div className="col-2">Cost</div>
             </div>}
-            {category === 'characters' ? <div className="row text-center text-danger">
+            {category === 'people' ? <div className="row text-center text-danger">
                 <div className="col-2">{item.birth_year}</div>
                 <div className="col-2">{item.gender}</div>
                 <div className="col-2">{item.height}</div>

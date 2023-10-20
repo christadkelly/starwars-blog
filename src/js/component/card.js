@@ -31,9 +31,9 @@ const Card = (props) => {
                 <h5 className="card-title">
                     {item.name}
                 </h5>
-                {category === 'characters' ? <p className="card-text">Gender: {item.gender}<br/>Hair Color: {item.hair_color}<br/>Eye Color: {item.eye_color}</p>:
-                category === 'planets' ? <p className="card-text">Population: <br/> Terrain: </p>:
-                <p className="card-text">Vehicle Class: <br/>Cost: credits</p>}
+                {category === 'people' ? <p className="card-text">Gender: {item.gender}<br/>Hair Color: {item.hair_color}<br/>Eye Color: {item.eye_color}</p>:
+                category === 'planets' ? <p className="card-text">Population: {item.population}<br/> Terrain: {item.terrain}</p>:
+                <p className="card-text">Vehicle Class: {item.vehicle_class}<br/>Cost: {item.cost_in_credits} credits</p>}
                 <div className="d-flex justify-content-between">
                     <button className="btn btn-outline-primary" onClick={clickHandler}>Learn more!</button>
                     <button type="button" className="btn btn-outline-warning" onClick={clicked ? deleteClick : favoriteClick}>
