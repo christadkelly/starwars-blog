@@ -1,19 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from '../store/appContext'
 import { useNavigate } from "react-router-dom";
 
 const Card = (props) => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
+
+    const [clicked, setClicked] = useState(false)
     const category = props.category;
     const index = props.index;
     const item = store[category][index];
+
     const clickHandler = () => {
         navigate(`/${category}/${index}`)
     }
     const favoriteClick = () => {
         actions.addFavorite(category, index)
+        setClicked(true)
     }
+    const deleteClick = () => {
+        actions.deleteFavorite(item)
+        setClicked(false)
+    }
+    
 
 	return (
         <div className="card mx-2" style={{width: '18rem'}}>
@@ -27,8 +36,8 @@ const Card = (props) => {
                 <p className="card-text">Vehicle Class: <br/>Cost: credits</p>}
                 <div className="d-flex justify-content-between">
                     <button className="btn btn-outline-primary" onClick={clickHandler}>Learn more!</button>
-                    <button type="button" className="btn btn-outline-warning" onClick={favoriteClick}>
-                        <i className="fa-regular fa-heart"></i>
+                    <button type="button" className="btn btn-outline-warning" onClick={clicked ? deleteClick : favoriteClick}>
+                        {clicked ? <i class="fa-solid fa-heart-circle-check"></i> : <i className="fa-regular fa-heart"></i>}
                     </button>
                 </div>
             </div>

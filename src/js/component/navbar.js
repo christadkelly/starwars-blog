@@ -5,10 +5,6 @@ import { Link } from "react-router-dom";
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
-	const deleteHandler = (favorite) => {
-		console.log(favorite)
-		// actions.deleteFavorite(index)
-	}
 
 	return (
 		<nav className="navbar navbar-light bg-light mb-3">
@@ -32,7 +28,7 @@ export const Navbar = () => {
 							return(
 								<li className="d-flex align-items-center" key={idx}>
 									<Link idx={idx} class="dropdown-item" to={`/${item.category}/${item.index}`}>{item.name}</Link>
-									<button onClick={() => actions.deleteFavorite(idx)}>
+									<button className="btn me-1" onClick={() => actions.deleteFavorite(item)}>
 										<i class="fa-regular fa-trash-can"></i>
 									</button>
 								</li>
