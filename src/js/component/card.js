@@ -11,12 +11,14 @@ const Card = (props) => {
     const index = props.index;
     const item = store[category][index];
     const favoritesList = [];
+    const imgUrl = `https://starwars-visualguide.com/assets/img/${category}/${item.uid}.jpg`;
+    const imgError = "https://starwars-visualguide.com/assets/img/placeholder.jpg"
 
     useEffect(() => {
         store.favorites.map((favorite) => {
             favoritesList.push(favorite.name)
         })
-        if(favoritesList.includes(item.name)) {
+        if(favoritesList.includes(item.properties.name)) {
             setClicked(true)
         } else {
             setClicked(false)
@@ -37,14 +39,20 @@ const Card = (props) => {
 
 	return (
         <div className="card mx-2 p-0" style={{width: '18rem'}}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfYSTMfRq8swN37jSCSqwEzjlzhv5IMINzl_JG3rDz&s" className="card-img-top img-fluid" alt="..."/>
+            <img 
+            src={imgUrl} 
+            className="card-img-top img-fluid" 
+            onError={({ currentTarget }) => {
+                currentTarget.onerror = null;
+                currentTarget.src = imgError
+            }}/>
             <div className="card-body">
                 <h5 className="card-title">
-                    {item.name}
+                    {item.properties.name}
                 </h5>
-                {category === 'people' ? <p className="card-text">Gender: {item.gender}<br/>Hair Color: {item.hair_color}<br/>Eye Color: {item.eye_color}</p>:
-                category === 'planets' ? <p className="card-text">Population: {item.population}<br/> Terrain: {item.terrain}</p>:
-                <p className="card-text">Vehicle Class: {item.vehicle_class}<br/>Cost: {item.cost_in_credits} credits</p>}
+                {category === 'characters' ? <p className="card-text">Gender: {item.properties.gender}<br/>Hair Color: {item.properties.hair_color}<br/>Eye Color: {item.properties.eye_color}</p>:
+                category === 'characters' ? <p className="card-text">Population: {item.properties.population}<br/> Terrain: {item.properties.terrain}</p>:
+                <p className="card-text">Vehicle Class: {item.properties.vehicle_class}<br/>Cost: {item.properties.cost_in_credits} credits</p>}
                 <div className="d-flex justify-content-between">
                     <button className="btn btn-outline-primary" onClick={clickHandler}>Learn more!</button>
                     <button type="button" className="btn btn-outline-warning" onClick={clicked ? deleteClick : favoriteClick}>

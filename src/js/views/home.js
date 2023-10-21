@@ -5,7 +5,7 @@ import "../../styles/home.css";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	const categories = ["people", "planets", "vehicles"];
+	const categories = ["characters", "planets", "vehicles"];
 	const headerCategories = ["Characters", "Planets", "Vehicles"];
 
 	return (

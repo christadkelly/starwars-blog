@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			people: [],
+			characters: [],
 			planets: [],
 			vehicles: [],
 			favorites: []
@@ -16,14 +16,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					// }
 					if (key !== 'favorites'){
 						try {
-							const response = await fetch(`https://www.swapi.tech/api/${key}`);
+							const url = key === 'characters' ? "https://www.swapi.tech/api/people" : `https://www.swapi.tech/api/${key}`
+							const response = await fetch(url);
 							const apiResponse = await response.json();
 							const apiResults = apiResponse.results;
 							apiResults.map(async(item, index) => {
 								try{
 									const resp = await fetch(item.url)
 									const newResp = await resp.json()
-									const newItem = newResp.result.properties
+									const newItem = newResp.result
 									const currentItems = getStore()[key]
 									const tempItems = currentItems.toSpliced(index, 0, newItem)
 									setStore({ [key] : tempItems})
@@ -40,7 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addFavorite: (category, index) => {
 				const list = getStore().favorites;
 				const newFavorite = getStore()[category][index];
-				const newFavoriteDetails = {"name": newFavorite.name, "category": category, "index": index }
+				const newFavoriteDetails = {"name": newFavorite.properties.name, "category": category, "index": index }
 				const newList = list.toSpliced((list.length-1), 0, newFavoriteDetails)
 				setStore({favorites: newList})
 			},

@@ -6,6 +6,8 @@ export const Details = () => {
 	const { store, actions } = useContext(Context);
     const { index, category } = useParams();
     const item = store[category][index];
+    const imgUrl = `https://starwars-visualguide.com/assets/img/${category}/${item.uid}.jpg`
+    const imgError = "https://starwars-visualguide.com/assets/img/placeholder.jpg"
     
 	return (
 		<div className="container">
@@ -13,15 +15,19 @@ export const Details = () => {
                 <div className="col-6">
                     <img 
                     className="img-fluid"
-                    src="https://www.bakiautomobile.com/wp-content/uploads/2020/06/800x600.png"/>
+                    src={imgUrl}
+                    onError={({ currentTarget }) => {
+                        currentTarget.onerror = null;
+                        currentTarget.src = imgError
+                    }}/>
                 </div>
                 <div className="col-6 text-center">
-                    <h1>{item.name}</h1>
-                    <p>sdlkfjsdklfkj</p>
+                    <h1>{item.properties.name}</h1>
+                    <p>{item.description}</p>
                 </div>
             </div>
             <hr className="text-danger"></hr>
-            {category ==='people' ?  <div className="row text-center fw-bold text-danger">
+            {category ==='characters' ?  <div className="row text-center fw-bold text-danger">
                 <div className="col-2">Birth Year</div>
                 <div className="col-2">Gender</div>
                 <div className="col-2">Height</div>
@@ -45,29 +51,29 @@ export const Details = () => {
                 <div className="col-2">Manufacturer</div>
                 <div className="col-2">Cost</div>
             </div>}
-            {category === 'people' ? <div className="row text-center text-danger">
-                <div className="col-2">{item.birth_year}</div>
-                <div className="col-2">{item.gender}</div>
-                <div className="col-2">{item.height}</div>
-                <div className="col-2">{item.hair_color}</div>
-                <div className="col-2">{item.skin_color}</div>
-                <div className="col-2">{item.eye_color}</div>
+            {category === 'characters' ? <div className="row text-center text-danger">
+                <div className="col-2">{item.properties.birth_year}</div>
+                <div className="col-2">{item.properties.gender}</div>
+                <div className="col-2">{item.properties.height}</div>
+                <div className="col-2">{item.properties.hair_color}</div>
+                <div className="col-2">{item.properties.skin_color}</div>
+                <div className="col-2">{item.properties.eye_color}</div>
             </div>:
             category === 'planets' ? <div className="row text-center text-danger">
-                <div className="col-2">{item.population}</div>
-                <div className="col-2">{item.terrain}</div>
-                <div className="col-2">{item.climate}</div>
-                <div className="col-2">{item.gravity}</div>
-                <div className="col-2">{item.orbital_period}</div>
-                <div className="col-2">{item.rotation_period}</div>
+                <div className="col-2">{item.properties.population}</div>
+                <div className="col-2">{item.properties.terrain}</div>
+                <div className="col-2">{item.properties.climate}</div>
+                <div className="col-2">{item.properties.gravity}</div>
+                <div className="col-2">{item.properties.orbital_period}</div>
+                <div className="col-2">{item.properties.rotation_period}</div>
             </div>:
             <div className="row text-center text-danger">
-                <div className="col-2">{item.vehicle_class}</div>
-                <div className="col-2">{item.crew}</div>
-                <div className="col-2">{item.length}</div>
-                <div className="col-2">{item.max_atmosphering_speed} kph</div>
-                <div className="col-2">{item.manufacturer}</div>
-                <div className="col-2">{item.cost_in_credits} credits</div>
+                <div className="col-2">{item.properties.vehicle_class}</div>
+                <div className="col-2">{item.properties.crew}</div>
+                <div className="col-2">{item.properties.length}</div>
+                <div className="col-2">{item.properties.max_atmosphering_speed} kph</div>
+                <div className="col-2">{item.properties.manufacturer}</div>
+                <div className="col-2">{item.properties.cost_in_credits} credits</div>
             </div>}
         </div>
 	);

@@ -23,10 +23,10 @@ const injectContext = PassedComponent => {
 		}, []);
 
 		// useEffect(() => {
-		// 	localStorage.setItem('people', JSON.stringify(state.store.people));
+		// 	localStorage.setItem('characters', JSON.stringify(state.store.characters));
 		// 	localStorage.setItem('planets', JSON.stringify(state.store.planets));
 		// 	localStorage.setItem('vehicles', JSON.stringify(state.store.vehicles))
-		// }, [state.store.people, state.store.planets, state.store.vehicles]);
+		// }, [state.store.characters, state.store.planets, state.store.vehicles]);
 
 		// useEffect(() => {
 		// 	localStorage.setItem('favorites', JSON.stringify(state.store.favorites))
