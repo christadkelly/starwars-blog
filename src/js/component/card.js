@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from '../store/appContext'
 import { useNavigate } from "react-router-dom";
+import "../../styles/card.css";
 
 const Card = (props) => {
     const { store, actions } = useContext(Context);
@@ -53,6 +54,8 @@ const Card = (props) => {
                 {category === 'characters' ? <p className="card-text">Gender: {item.properties.gender}<br/>Hair Color: {item.properties.hair_color}<br/>Eye Color: {item.properties.eye_color}</p>:
                 category === 'characters' ? <p className="card-text">Population: {item.properties.population}<br/> Terrain: {item.properties.terrain}</p>:
                 <p className="card-text">Vehicle Class: {item.properties.vehicle_class}<br/>Cost: {item.properties.cost_in_credits} credits</p>}
+            </div>
+            <div className="card-footer">
                 <div className="d-flex justify-content-between">
                     <button className="btn btn-outline-primary" onClick={clickHandler}>Learn more!</button>
                     <button type="button" className="btn btn-outline-warning" onClick={clicked ? deleteClick : favoriteClick}>
